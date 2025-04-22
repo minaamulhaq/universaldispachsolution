@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/auth';
-const { API } = useAuth();
-const URL = `${API}/api/auth/login`;
+
+
 const Login = () => {
+    const { API } = useAuth();
+    const URL = `${API}/api/auth/login`;
     const [formData, setFormData] = useState({
         email: '',
         password: ''
