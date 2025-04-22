@@ -1,11 +1,13 @@
 // AdminContact.jsx
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../store/auth";
 export default function AdminContact() {
+    const { API } = useAuth()
     const Token = localStorage.getItem("token");
     const [contactsData, setContactsData] = useState([]);
     const fetchContacts = async () => {
         try {
-            const response = await fetch("http://localhost:3000/admin/contact", {
+            const response = await fetch(`${API}/admin/contact`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

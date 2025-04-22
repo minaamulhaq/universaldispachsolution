@@ -5,6 +5,7 @@ const Contactus = () => {
 
     const auth = useAuth();
     const UserData = auth.UserData;
+    const { API } = useAuth()
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -40,7 +41,7 @@ const Contactus = () => {
         }
         console.log("Form data:", formData);
         try {
-            const response = await fetch("http://localhost:3000/api/auth/contact", {
+            const response = await fetch(`${API}/api/auth/contact`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

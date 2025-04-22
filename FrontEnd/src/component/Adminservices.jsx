@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../store/auth";
 
 function Adminservices() {
     const Token = localStorage.getItem("token");
     const [services, setServices] = useState([]);
     const [editService, setEditService] = useState(null);
+    const { API } = useAuth()
     const fetchService = async () => {
         try {
-            const response = await fetch("http://localhost:3000/admin/services", {
+            const response = await fetch(`${API}/admin/services`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,7 +30,7 @@ function Adminservices() {
 
     const handleDelete = async (_id) => {
         try {
-            const response = await fetch(`http://localhost:3000/admin/services/delete/${_id}`, {
+            const response = await fetch(`${API}/admin/services/delete/${_id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,7 +64,7 @@ function Adminservices() {
 
     const handleSave = async () => {
 
-        const updatedService = await fetch(`http://localhost:3000/admin/services/update/${editService._id}`, {
+        const updatedService = await fetch(`${API}/admin/services/update/${editService._id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

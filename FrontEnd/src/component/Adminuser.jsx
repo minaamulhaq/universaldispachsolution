@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../store/auth";
 
 export default function AdminUser() {
 
     const Token = localStorage.getItem("token");
     const [users, setUsers] = useState([]);
     const [editUser, setEditUser] = useState(null);
+    const { API } = useAuth()
 
     // Delete user from local state only
     const handleDelete = (_id) => {
@@ -34,7 +36,7 @@ export default function AdminUser() {
     // GET data from backend
     const userData = async () => {
         try {
-            const response = await fetch("http://localhost:3000/admin/user", {
+            const response = await fetch(`${API}/admin/user`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

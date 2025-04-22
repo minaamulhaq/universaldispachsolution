@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
-
-const URL = "http://localhost:3000/api/auth/register";
+const { API } = useAuth()
+const URL = `${API}/api/auth/register`;
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
         name: "",
