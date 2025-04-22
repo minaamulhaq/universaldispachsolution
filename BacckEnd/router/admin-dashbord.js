@@ -5,7 +5,7 @@ import { adminServices } from "../controllers/admin-services.js";
 import { adminMiddleware } from "../middleware/adminMiddleware.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { deleteService } from "../controllers/delete-service-controller.js";
-import { updateServices } from "../controllers/services-update-Controller.js";
+import { updateServices } from "../controllers/services-update-controller.js";
 
 const router = Router();
 router.route("/user").get(authMiddleware, adminMiddleware, adminUser);
