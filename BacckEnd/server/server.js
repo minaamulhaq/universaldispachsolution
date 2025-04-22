@@ -34,7 +34,7 @@ const PORT = process.env.PORT || 3000;
 connectDB().then(() => {
 
     app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
+        console.log(`Server is running on ${PORT}`);
         // console.log(`Press Ctrl+C to stop the server`);
     });
 
