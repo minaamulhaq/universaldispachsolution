@@ -9,8 +9,21 @@ import { router as servicesRouter } from '../router/services-router.js';
 import { router as adminRouter } from '../router/admin-dashbord.js';
 
 const app = express();
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://146.190.147.92:4173',
+    // future production domain
+];
 app.use(cors({
-    origin: 'http://localhost:5173', // Replace with your frontend URL
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    // Replace with your frontend URL
+
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
     // Allow credentials (cookies, authorization headers, etc.)
