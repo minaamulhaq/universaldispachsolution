@@ -41,7 +41,7 @@ app.use("/admin", adminRouter);
 
 app.use(errorMiddleware);
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello World! Server is running...');
 });
 
 const PORT = process.env.PORT || 3001;
