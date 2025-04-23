@@ -12,6 +12,7 @@ const app = express();
 const allowedOrigins = [
     'http://localhost:5173',
     'http://146.190.147.92:4173',
+    'http://146.190.147.92',
     // future production domain
 ];
 app.use(cors({
