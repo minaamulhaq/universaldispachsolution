@@ -63,23 +63,28 @@ function Adminservices() {
     };
 
     const handleSave = async () => {
+        try {
+            const updatedService = await fetch(`${API}/admin/services/update/${editService._id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${Token}`
+                },
+                body: JSON.stringify(editService),
+            });
+            const data = await updatedService.json();
+            console.log(data);
+            if (updatedService.ok) {
+                setServices(services.map(service => (
+                    service._id === editService._id ? editService : service
+                )));
+                setEditService(null);
+            }
+        } catch (error) {
+            console.error("Error updating service:", error);
 
-        const updatedService = await fetch(`${API}/admin/services/update/${editService._id}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${Token}`
-            },
-            body: JSON.stringify(editService),
-        });
-        const data = await updatedService.json();
-        console.log(data);
-        if (updatedService.ok) {
-            setServices(services.map(service => (
-                service._id === editService._id ? editService : service
-            )));
-            setEditService(null);
         }
+
     };
 
     return (

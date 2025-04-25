@@ -9,9 +9,23 @@ export default function AdminUser() {
     const { API } = useAuth()
 
     // Delete user from local state only
-    const handleDelete = (_id) => {
+    const handleDelete = async (_id) => {
+        try {
+            const deleteUser = await fetch(`${API}/admin/user/delete/${_id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${Token}`,
+                }
+            })
+            const data = await deleteUser.json();
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
         setUsers(users.filter(user => user._id !== _id));
-    };
+    }
+
+
 
     // Set user to be edited
     const handleEditClick = (user) => {
@@ -28,7 +42,23 @@ export default function AdminUser() {
     };
 
     // Save edited user to local state only
-    const handleSave = () => {
+    const handleSave = async () => {
+        try {
+            const updatedService = await fetch(`${API}/admin/user/update/${editUser._id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${Token}`
+                },
+                body: JSON.stringify(editUser),
+            });
+        } catch (error) {
+            console.error("Error updating user:", error);
+        }
+
+
+
+
         setUsers(users.map((user) => (user._id === editUser._id ? editUser : user)));
         setEditUser(null);
     };
@@ -156,4 +186,4 @@ export default function AdminUser() {
             )}
         </div>
     );
-}
+};
